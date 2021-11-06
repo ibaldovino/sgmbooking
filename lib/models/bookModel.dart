@@ -1,5 +1,3 @@
-import 'dart:convert' show utf8;
-
 const bookData = {
   "count": 4,
   "next": null,
@@ -66,7 +64,7 @@ class BookModel {
     next = json['next'] ?? "";
     previous = json['previous'] ?? "";
     results =
-        List.from(json['results']).map((e) =>  Results.fromJson(e)).toList();
+        List.from(json['results']).map((e) => Results.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
@@ -88,6 +86,7 @@ class Results {
     required this.countPassages,
     required this.rute,
     required this.finished,
+    required this.program,
   });
   late final int id;
   late final String estimatedDeparture;
@@ -96,6 +95,7 @@ class Results {
   late final int countPassages;
   late final Rute rute;
   late final bool finished;
+  late final Program program;
 
   Results.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -105,6 +105,7 @@ class Results {
     countPassages = json['count_passages'];
     rute = Rute.fromJson(json['rute']);
     finished = json['finished'];
+    program = Program.fromJson(json['program']);
   }
 
   Map<String, dynamic> toJson() {
@@ -116,6 +117,28 @@ class Results {
     _data['count_passages'] = countPassages;
     _data['rute'] = rute.toJson();
     _data['finished'] = finished;
+    _data['program'] = program;
+    return _data;
+  }
+}
+
+class Program {
+  Program({
+    //required this.days,
+    required this.endProgram,
+  });
+  //late final List<Days> days;
+  late final String endProgram;
+
+  Program.fromJson(Map<String, dynamic> json) {
+    //days = List.from(json['days']).map((e) => Days.fromJson(e)).toList();
+    endProgram = json['end_program'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    //_data['days'] = days.map((e) => e.toJson()).toList();
+    _data['end_program'] = endProgram;
     return _data;
   }
 }
@@ -164,6 +187,23 @@ class Rute {
     return _data;
   }
 }
+
+/*class Days {
+  Days({
+    required this.name,
+  });
+  late final List<Days> name;
+
+  Days.fromJson(Map<String, dynamic> json) {
+    days = List.from(json['days']).map((e) => Days.fromJson(e)).toList();
+  }
+
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['days'] = days.map((e) => e.toJson()).toList();
+    return _data;
+  }
+}*/
 
 class Stops {
   Stops({

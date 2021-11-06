@@ -37,6 +37,7 @@ class _DetailDataState extends State<DetailData> {
         child: Column(
           children: [
             SizedBox(height: 20),
+            wdEachRow("id viaje", widget.results.id.toString()),
             wdEachRow("Origen", widget.results.rute.origin.name),
             wdEachRow("Destino", widget.results.rute.destination.name),
             wdEachRow(
@@ -44,6 +45,12 @@ class _DetailDataState extends State<DetailData> {
                 DateFormat('dd/MM/yy')
                     .format(DateFormat('dd/MM/yy HH:mm')
                         .parse(widget.results.estimatedDeparture))
+                    .toString()),
+            wdEachRow(
+                "Fecha fin",
+                DateFormat('dd/MM/yy')
+                    .format(DateFormat('yyyy-MM-dd')
+                        .parse(widget.results.program.endProgram))
                     .toString()),
             wdEachRow(
                 "Hora de partida",
@@ -104,7 +111,7 @@ class _DetailDataState extends State<DetailData> {
         padding: EdgeInsets.only(bottom: 10),
         child: Row(
           children: [
-            Container(width: 100, child: Text(title, style: black17_54)),
+            Container(width: 120, child: Text(title, style: black17_54)),
             Container(child: Text(value, style: black16)),
           ],
         ));
