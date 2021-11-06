@@ -77,7 +77,7 @@ class NetworkBloc extends ChangeNotifier {
 
   Future<bool> getBooking() async {
     var res = await CallApi()
-        .getDataParameterWithToken('rest/v1/travel/?format=json', "");
+        .getDataParameterWithToken('rest/v1/travel/', ""); //?format=json
     if (res.statusCode == 200) {
       var body = json.decode(utf8.decode(res.bodyBytes));
       _bookData = BookModel.fromJson(body);

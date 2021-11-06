@@ -8,9 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:sgmbooking/utils/appDrawer.dart';
 import 'package:sgmbooking/utils/fonts.dart';
 import 'package:sgmbooking/service/next_screen.dart';
-import 'dart:convert';
-
-import 'package:utf/utf.dart';
 
 class BookingList extends StatefulWidget {
   const BookingList({Key? key}) : super(key: key);
@@ -44,7 +41,7 @@ class _BookingListState extends State<BookingList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Viajes"),
+        title: Text("Viajes disponibles"),
       ),
       drawer: appDrawer(context),
       body: DoubleBackToCloseApp(
@@ -90,13 +87,13 @@ class _BookingListState extends State<BookingList> {
                                       "Destino", value.rute.destination.name),
                                   wdEachRow(
                                       "Salida",
-                                      DateFormat('kk:mm')
+                                      DateFormat('HH:mm')
                                           .format(DateFormat('dd/MM/yy HH:mm')
                                               .parse(value.estimatedDeparture))
                                           .toString()),
                                   wdEachRow(
                                       "Llegada",
-                                      DateFormat('kk:mm')
+                                      DateFormat('HH:mm')
                                           .format(DateFormat('dd/MM/yy HH:mm')
                                               .parse(value.estimatedArrival))
                                           .toString()),

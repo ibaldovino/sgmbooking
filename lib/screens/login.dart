@@ -15,7 +15,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   var formKey = GlobalKey<FormState>();
   var emailCtrl = TextEditingController();
@@ -43,11 +42,21 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 20,
                 ),
-                Text('Log In',
-                    style: TextStyle(
-                        fontSize: 25, fontWeight: FontWeight.w900)),
+                new Image.asset(
+                  'assets/images/GreenBus.png',
+                  width: 150,
+                  height: 150.0,
+                ),
                 SizedBox(
-                  height: 80,
+                  height: 40,
+                ),
+                Text(
+                  'Log In',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w900),
+                  textAlign: TextAlign.center,
+                ),
+                SizedBox(
+                  height: 20,
                 ),
                 TextFormField(
                   decoration: InputDecoration(
@@ -90,7 +99,8 @@ class _LoginPageState extends State<LoginPage> {
                         }),
                   ),
                   validator: (String? value) {
-                    if (value!.length == 0) return "La contraseña no puede estar vacia";
+                    if (value!.length == 0)
+                      return "La contraseña no puede estar vacia";
                     return null;
                   },
                   onChanged: (String value) {
@@ -122,25 +132,26 @@ class _LoginPageState extends State<LoginPage> {
                   height: 45,
                   child: TextButton(
                       style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  side: BorderSide(color: Theme.of(context).primaryColor)
-                              )
-                          ),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(
+                                          color:
+                                              Theme.of(context).primaryColor))),
                           backgroundColor: MaterialStateProperty.resolveWith(
-                                  (states) => Theme.of(context).primaryColor)),
+                              (states) => Theme.of(context).primaryColor)),
                       child: signInStart == false
                           ? Text('Log In',
-                          style: TextStyle(
-                              fontSize: 16, color: Colors.white))
+                              style:
+                                  TextStyle(fontSize: 16, color: Colors.white))
                           : signInComplete == false
-                          ? CircularProgressIndicator(
-                        backgroundColor: Colors.white,
-                      )
-                          : Text('Login aceptado!',
-                          style: TextStyle(
-                              fontSize: 16, color: Colors.white)),
+                              ? CircularProgressIndicator(
+                                  backgroundColor: Colors.white,
+                                )
+                              : Text('Login aceptado!',
+                                  style: TextStyle(
+                                      fontSize: 16, color: Colors.white)),
                       onPressed: () {
                         signInEmailPassword();
                       }),
@@ -148,14 +159,14 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 10,
                 ),
-                Row(
+                /*Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Text("Necesita un usuario?"),
                     TextButton(
                       child: Text('Contactarse con RRHH',
-                          style: TextStyle(
-                              color: Theme.of(context).primaryColor)),
+                          style:
+                              TextStyle(color: Theme.of(context).primaryColor)),
                       onPressed: () {
                         // nextScreenReplace(context, SignUpPage());
                       },
@@ -164,12 +175,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(
                   height: 50,
-                ),
+                ),*/
               ],
             ),
           ),
         ));
   }
+
   signInEmailPassword() async {
     NetworkBloc sb = Provider.of<NetworkBloc>(context, listen: false);
     if (formKey.currentState!.validate()) {
@@ -179,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
         signInStart = true;
       });
       sb.signInwithEmailPassword(email, pass).then((_) async {
-        print(["sb.hasError:",sb.hasError]);
+        print(["sb.hasError:", sb.hasError]);
         if (sb.hasError == false) {
           sb.guestSignout();
           sb.setSignIn();
@@ -196,6 +208,7 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
   }
+
   void lockPressed() {
     if (offsecureText == true) {
       setState(() {
