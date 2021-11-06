@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sgmbooking/models/bookModel.dart';
 import 'package:sgmbooking/utils/fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:sgmbooking/service/netService.dart';
 
 class DetailData extends StatefulWidget {
   const DetailData({Key? key, required this.results}) : super(key: key);
