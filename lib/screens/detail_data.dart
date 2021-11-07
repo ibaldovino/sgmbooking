@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sgmbooking/models/bookModel.dart';
+import 'package:sgmbooking/service/netService.dart';
 import 'package:sgmbooking/utils/fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -46,12 +47,12 @@ class _DetailDataState extends State<DetailData> {
                     .format(DateFormat('dd/MM/yy HH:mm')
                         .parse(widget.results.estimatedDeparture))
                     .toString()),
-            wdEachRow(
+            /*wdEachRow(
                 "Fecha fin",
                 DateFormat('dd/MM/yy')
                     .format(DateFormat('yyyy-MM-dd')
                         .parse(widget.results.program.endProgram))
-                    .toString()),
+                    .toString()),*/
             wdEachRow(
                 "Hora de partida",
                 DateFormat('HH:mm')
@@ -74,7 +75,7 @@ class _DetailDataState extends State<DetailData> {
                 value: _value,
                 items: list_items.map((Stops item) {
                   return DropdownMenuItem<int>(
-                    child: Text('${item.name}'),
+                    child: Text('${item.name} - ${item.id}'),
                     value: item.id,
                   );
                 }).toList(),
@@ -98,7 +99,9 @@ class _DetailDataState extends State<DetailData> {
             onPrimary: Colors.white, // letras
           ),
           onPressed: () {
-            Navigator.pop(context);
+            () => bookTrip(72, 22, false, null);
+
+            //Navigator.pop(context);
           },
           child: Text('Confirmar agenda'),
         ),

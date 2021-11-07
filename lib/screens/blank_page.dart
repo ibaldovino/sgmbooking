@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sgmbooking/utils/appDrawer.dart';
 
-
 class BlankPage extends StatefulWidget {
   const BlankPage({Key? key}) : super(key: key);
 

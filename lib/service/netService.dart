@@ -88,3 +88,44 @@ class NetworkBloc extends ChangeNotifier {
     return true;
   }
 }
+
+Future bookTrip(travelID, stopID, subToAll, subToDate) async {
+  // try {
+  print("------------------------005");
+  var data = {
+    "travel_id": travelID,
+    "stop_id": stopID,
+    "subscribe_to_all": subToAll,
+    "subscribe_to_date": subToDate
+  };
+
+  var res = await CallApi().postData(data, 'rest/v1/passenger');
+  var body = json.decode(res.body);
+
+  print(["login response:", res, body, res.statusCode]);
+
+  /*if (res.statusCode == 201) {
+      SharedPreferences localStorage = await SharedPreferences.getInstance();
+      localStorage.setString('token', body['token']);
+
+      var enUser = json.encode(body['pk']);
+      var deUser = json.decode(enUser);
+
+      _hasError = false;
+      notifyListeners();
+    } else if (res.statusCode == 401) {
+      _hasError = true;
+      _errorCode = body['non_field_errors'];
+      notifyListeners();
+    } else if (res.statusCode == 400) {
+      _hasError = true;
+      _errorCode = body['non_field_errors'][0];
+    } else {
+      _hasError = true;
+      if (body['password'] == null)
+        _errorCode = body['email'];
+      else
+        _errorCode = body['password'];
+      notifyListeners();
+    }*/
+}
