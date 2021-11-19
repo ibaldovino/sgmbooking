@@ -125,29 +125,19 @@ class Results {
 
 /*class Program {
   Program({
-    //required this.days,
     required this.endProgram,
   });
-  //late final List<Days> days;
+
   late final String endProgram;
 
-  /*Program.fromJson(Map<String, dynamic> json) {
-    //days = List.from(json['days']).map((e) => Days.fromJson(e)).toList();
+  Program.fromJson(Map<String, dynamic> json) {
     endProgram = json['end_program'];
-  }*/
-
-  factory Program.fromJson(Map<String, dynamic> json) => Program(
-        endProgram: json["end_program"] == null ? null : json["end_program"],
-      );
+  }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    //_data['days'] = days.map((e) => e.toJson()).toList();
     _data['end_program'] = endProgram;
 
-    /*if (this.endProgram.isEmpty) {
-      endProgram = '1900-01-01';
-    }*/
     return _data;
   }
 }*/

@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:intl/intl.dart';
-import 'package:sgmbooking/screens/blank_page.dart';
 import 'package:sgmbooking/screens/detail_data.dart';
 import 'package:sgmbooking/service/netService.dart';
 import 'package:provider/provider.dart';
@@ -11,21 +10,21 @@ import 'package:sgmbooking/utils/appDrawer.dart';
 import 'package:sgmbooking/utils/fonts.dart';
 import 'package:sgmbooking/service/next_screen.dart';
 
-class BookingList extends StatefulWidget {
-  const BookingList({Key? key}) : super(key: key);
+class PassageList extends StatefulWidget {
+  const PassageList({Key? key}) : super(key: key);
 
   @override
-  _BookingListState createState() => _BookingListState();
+  _PassageListState createState() => _PassageListState();
 }
 
-class _BookingListState extends State<BookingList> {
+class _PassageListState extends State<PassageList> {
   late NetworkBloc _networkBloc;
   bool isLoading = false;
   getBookData() async {
     setState(() {
       isLoading = true;
     });
-    await _networkBloc.getBooking();
+    await _networkBloc.getPassage();
     setState(() {
       isLoading = false;
     });
@@ -42,7 +41,7 @@ class _BookingListState extends State<BookingList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Viajes disponibles"),
+        title: Text("Viajes Agendados"),
       ),
       drawer: appDrawer(context),
       body: DoubleBackToCloseApp(
@@ -51,20 +50,21 @@ class _BookingListState extends State<BookingList> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 10),
-              ..._networkBloc.bookData.results
+              ..._networkBloc.passageData.resultsPassage
                   .asMap()
                   .map((key, value) => MapEntry(
                       key,
                       GestureDetector(
-                        onTap: () {
+                        /*onTap: () {
                           nextScreeniOS(context, DetailData(results: value));
-                        },
+                        },*/
                         child: Stack(
                           children: [
                             Container(
                               padding: EdgeInsets.fromLTRB(10, 5, 10, 5),
                               margin: EdgeInsets.fromLTRB(10, 5, 10, 5),
                               decoration: BoxDecoration(
+                                  color: Colors.green[100],
                                   border:
                                       Border.all(color: Colors.black, width: 1),
                                   borderRadius: BorderRadius.circular(5)),

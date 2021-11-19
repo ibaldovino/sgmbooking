@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sgmbooking/screens/blank_page.dart';
 import 'package:sgmbooking/screens/booking_list.dart';
+//import 'package:sgmbooking/screens/pasaggeList.dart';
 import 'package:sgmbooking/screens/login.dart';
+import 'package:sgmbooking/screens/pasaggeList.dart';
 import 'package:sgmbooking/service/next_screen.dart';
 
 Widget appDrawer(BuildContext context) {
@@ -38,10 +40,19 @@ Widget appDrawer(BuildContext context) {
           ),*/
         ),
         ListTile(
-          title: const Text('Viajes'),
+          title: const Text('Viajes Disponibles'),
           onTap: () {
             Navigator.pop(context);
             nextScreeniOSReplace(context, BookingList());
+            // Update the state of the app.
+            // ...
+          },
+        ),
+        ListTile(
+          title: const Text('Viajes Agendados'),
+          onTap: () {
+            Navigator.pop(context);
+            nextScreeniOSReplace(context, PassageList());
             // Update the state of the app.
             // ...
           },

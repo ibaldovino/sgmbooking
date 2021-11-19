@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sgmbooking/models/bookModel.dart';
+import 'package:sgmbooking/models/passageModel.dart';
 import 'package:sgmbooking/service/my_api.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,6 +22,10 @@ class NetworkBloc extends ChangeNotifier {
   BookModel _bookData =
       BookModel(count: 0, next: "", previous: "", results: []);
   BookModel get bookData => _bookData;
+
+  PassageModel _passageData =
+      PassageModel(count: 0, next: "", previous: "", resultsPassage: []);
+  PassageModel get passageData => _passageData;
 
   Future guestSignout() async {
     final SharedPreferences sp = await SharedPreferences.getInstance();
@@ -80,7 +85,20 @@ class NetworkBloc extends ChangeNotifier {
         .getDataParameterWithToken('rest/v1/travel/', ""); //?format=json
     if (res.statusCode == 200) {
       var body = json.decode(utf8.decode(res.bodyBytes));
-      _bookData = BookModel.fromJson(body);
+      _passageData = PassageModel.fromJson(body);
+    }
+
+    notifyListeners();
+
+    return true;
+  }
+
+  Future<bool> getPassage() async {
+    var res = await CallApi().getDataParameterWithToken(
+        'rest/v1/travel-with-passage/', ""); //?format=json
+    if (res.statusCode == 200) {
+      var body = json.decode(utf8.decode(res.bodyBytes));
+      _passageData = PassageModel.fromJson(body);
     }
 
     notifyListeners();
