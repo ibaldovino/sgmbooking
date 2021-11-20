@@ -85,7 +85,7 @@ class NetworkBloc extends ChangeNotifier {
         .getDataParameterWithToken('rest/v1/travel/', ""); //?format=json
     if (res.statusCode == 200) {
       var body = json.decode(utf8.decode(res.bodyBytes));
-      _passageData = PassageModel.fromJson(body);
+      _bookData = BookModel.fromJson(body);
     }
 
     notifyListeners();

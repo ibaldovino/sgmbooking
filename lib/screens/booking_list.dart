@@ -76,22 +76,22 @@ class _BookingListState extends State<BookingList> {
                                               fontSize: 25))),
                                   Divider(thickness: 0.5, color: Colors.grey),
                                   SizedBox(height: 5),
-                                  wdEachRow(
+                                  wdEachRowBK(
                                       "Fecha",
                                       DateFormat('dd/MM/yy')
                                           .format(DateFormat('dd/MM/yy HH:mm')
                                               .parse(value.estimatedDeparture))
                                           .toString()),
-                                  wdEachRow("Origen", value.rute.origin.name),
-                                  wdEachRow(
+                                  wdEachRowBK("Origen", value.rute.origin.name),
+                                  wdEachRowBK(
                                       "Destino", value.rute.destination.name),
-                                  wdEachRow(
+                                  wdEachRowBK(
                                       "Salida",
                                       DateFormat('HH:mm')
                                           .format(DateFormat('dd/MM/yy HH:mm')
                                               .parse(value.estimatedDeparture))
                                           .toString()),
-                                  wdEachRow(
+                                  wdEachRowBK(
                                       "Llegada",
                                       DateFormat('HH:mm')
                                           .format(DateFormat('dd/MM/yy HH:mm')
@@ -121,7 +121,7 @@ class _BookingListState extends State<BookingList> {
     );
   }
 
-  wdEachRow(String title, String value) {
+  wdEachRowBK(String title, String value) {
     return Padding(
         padding: EdgeInsets.only(bottom: 5),
         child: Row(
