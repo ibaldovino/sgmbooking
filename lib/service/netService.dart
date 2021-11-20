@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:sgmbooking/models/bookModel.dart';
 import 'package:sgmbooking/models/passageModel.dart';
 import 'package:sgmbooking/service/my_api.dart';
+import 'package:sgmbooking/utils/snacbar.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/src/widgets/framework.dart';
 
 class NetworkBloc extends ChangeNotifier {
   bool _hasError = false;
@@ -50,7 +52,7 @@ class NetworkBloc extends ChangeNotifier {
     };
 
     var res = await CallApi().postData(data, 'rest/v1/obtain-token/');
-    var body = json.decode(res.body);
+    var body = json.decode(utf8.decode(res.bodyBytes));
 
     print(["login response:", res, body, res.statusCode]);
 
@@ -105,45 +107,54 @@ class NetworkBloc extends ChangeNotifier {
 
     return true;
   }
-}
 
-Future bookTrip(travelID, stopID, subToAll, subToDate) async {
-  // try {
-  print("------------------------005");
-  var data = {
-    "travel_id": travelID,
-    "stop_id": stopID,
-    "subscribe_to_all": subToAll,
-    "subscribe_to_date": subToDate
-  };
+  Future bookTrip(travelID, stopID, subToAll, subToDate) async {
+    // try {
+    print("------------------------book trip");
 
-  var res = await CallApi().postData(data, 'rest/v1/passenger');
-  var body = json.decode(res.body);
+    var data = {
+      "travel_id": travelID,
+      "stop_id": stopID,
+      "subscribe_to_all": subToAll,
+      "subscribe_to_date": subToDate
+    };
+    debugPrint(data.toString());
+    var res = await CallApi().postGetDataWithToken(data, 'rest/v1/passenger');
+    var body = json.decode(utf8.decode(res.bodyBytes));
 
-  print(["login response:", res, body, res.statusCode]);
+    //print(["Booking complete:", res.toString(), body, res.statusCode]);
 
-  /*if (res.statusCode == 201) {
-      SharedPreferences localStorage = await SharedPreferences.getInstance();
-      localStorage.setString('token', body['token']);
+    if (res.statusCode == 200) {
+      /*var reservaDetalle = json.encode(body);
+      var resDetail = json.decode(reservaDetalle);*/
 
-      var enUser = json.encode(body['pk']);
-      var deUser = json.decode(enUser);
+      debugPrint(body.toString());
 
       _hasError = false;
       notifyListeners();
     } else if (res.statusCode == 401) {
       _hasError = true;
-      _errorCode = body['non_field_errors'];
+      _errorCode = body['detail'];
+      errorMessage(_errorCode);
       notifyListeners();
     } else if (res.statusCode == 400) {
       _hasError = true;
-      _errorCode = body['non_field_errors'][0];
+      _errorCode = body['detail'];
+      //_errorCode = "Ya eres pasajero en este viaje";
+      print(["Error numero: ", res.statusCode]);
+      print(_errorCode);
+    } else if (res.statusCode == 404) {
+      _hasError = true;
+      _errorCode = body['detail'];
+      errorMessage(_errorCode);
     } else {
       _hasError = true;
       if (body['password'] == null)
         _errorCode = body['email'];
       else
         _errorCode = body['password'];
+      errorMessage(_errorCode);
       notifyListeners();
-    }*/
+    }
+  }
 }

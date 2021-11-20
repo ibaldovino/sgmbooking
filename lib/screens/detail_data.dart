@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sgmbooking/models/bookModel.dart';
+import 'package:sgmbooking/screens/booking_list.dart';
+import 'package:sgmbooking/screens/pasaggeList.dart';
 import 'package:sgmbooking/service/netService.dart';
 import 'package:sgmbooking/utils/fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:sgmbooking/service/next_screen.dart';
+import 'package:sgmbooking/utils/snacbar.dart';
 
 class DetailData extends StatefulWidget {
   const DetailData({Key? key, required this.results}) : super(key: key);
@@ -15,6 +20,10 @@ class DetailData extends StatefulWidget {
 
 class _DetailDataState extends State<DetailData> {
   int _value = 0;
+  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  var formKey = GlobalKey<FormState>();
+  bool bookingStart = true;
+  bool bookingComplete = false;
 
   // List<int> list_items=[0,1,2,3,4];
   late List<Stops> list_items;
@@ -30,12 +39,14 @@ class _DetailDataState extends State<DetailData> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text("Detalles del viaje"),
       ),
       body: Container(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         child: Column(
+          key: formKey,
           children: [
             SizedBox(height: 20),
             wdEachRow("id viaje", widget.results.id.toString()),
@@ -99,9 +110,8 @@ class _DetailDataState extends State<DetailData> {
             onPrimary: Colors.white, // letras
           ),
           onPressed: () {
-            () => bookTrip(72, 22, false, null);
-
-            //Navigator.pop(context);
+            debugPrint("el boton se apreto");
+            bookTripFromDetails(widget.results.id, _value, false, null);
           },
           child: Text('Confirmar agenda'),
         ),
@@ -118,5 +128,28 @@ class _DetailDataState extends State<DetailData> {
             Container(child: Text(value, style: black16)),
           ],
         ));
+  }
+
+  bookTripFromDetails(travelID, stopID, subToAll, subToDate) async {
+    NetworkBloc sb = Provider.of<NetworkBloc>(context, listen: false);
+    FocusScope.of(context).requestFocus(new FocusNode());
+    sb.bookTrip(travelID, stopID, subToAll, subToDate).then((_) async {
+      print(["sb.hasError:", sb.hasError]);
+      if (sb.hasError == false) {
+        setState(() {
+          bookingComplete = true;
+        });
+
+        nextScreeniOSReplace(context, PassageList());
+      } else {
+        setState(() {
+          bookingStart = false;
+        });
+
+        String errorText =
+            "Hubo un error con su reserva - " + sb.errorCode.toString();
+        openSnacbar(_scaffoldKey, errorText);
+      }
+    });
   }
 }
