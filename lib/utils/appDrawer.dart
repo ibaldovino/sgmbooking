@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sgmbooking/screens/blank_page.dart';
 import 'package:sgmbooking/screens/booking_list.dart';
-//import 'package:sgmbooking/screens/pasaggeList.dart';
-import 'package:sgmbooking/screens/login.dart';
 import 'package:sgmbooking/screens/pasaggeList.dart';
+import 'package:sgmbooking/screens/PassaggeDetail.dart';
+import 'package:sgmbooking/screens/login.dart';
 import 'package:sgmbooking/service/next_screen.dart';
 
 Widget appDrawer(BuildContext context) {

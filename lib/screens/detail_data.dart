@@ -25,7 +25,6 @@ class _DetailDataState extends State<DetailData> {
   bool bookingStart = true;
   bool bookingComplete = false;
 
-  // List<int> list_items=[0,1,2,3,4];
   late List<Stops> list_items;
 
   @override

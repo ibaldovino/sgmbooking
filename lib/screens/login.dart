@@ -32,7 +32,6 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         key: _scaffoldKey,
-        //backgroundColor: Color: Colors.,
         body: Form(
           key: formKey,
           child: Padding(
@@ -69,7 +68,8 @@ class _LoginPageState extends State<LoginPage> {
                   controller: emailCtrl,
                   keyboardType: TextInputType.emailAddress,
                   validator: (String? value) {
-                    if (value!.length == 0) return "Email can't be empty";
+                    if (value!.length == 0)
+                      return "El correo no puede estar vacio";
                     return null;
                   },
                   onChanged: (String value) {

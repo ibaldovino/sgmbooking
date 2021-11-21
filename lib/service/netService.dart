@@ -157,4 +157,55 @@ class NetworkBloc extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  Future cancelTrip(travelID, deleteAll, delToDate) async {
+    // try {
+    print("------------------------Cancel trip");
+
+    var data = {
+      "travel_id": travelID,
+      "del_all": deleteAll,
+      "del_to_date": delToDate
+    };
+    debugPrint(data.toString());
+    var res =
+        await CallApi().postGetDataWithToken(data, 'rest/v1/passenger-remove');
+
+    if (res.bodyBytes.isNotEmpty) {
+      var body = json.decode(utf8.decode(res.bodyBytes));
+
+      if (res.statusCode == 200) {
+        /*var reservaDetalle = json.encode(body);
+      var resDetail = json.decode(reservaDetalle);*/
+
+        debugPrint(body.toString());
+
+        _hasError = false;
+        notifyListeners();
+      } else if (res.statusCode == 401) {
+        _hasError = true;
+        _errorCode = body['detail'];
+        errorMessage(_errorCode);
+        notifyListeners();
+      } else if (res.statusCode == 400) {
+        _hasError = true;
+        _errorCode = body['detail'];
+        //_errorCode = "Ya eres pasajero en este viaje";
+        print(["Error numero: ", res.statusCode]);
+        print(_errorCode);
+      } else if (res.statusCode == 404) {
+        _hasError = true;
+        _errorCode = body['detail'];
+        errorMessage(_errorCode);
+      } else {
+        _hasError = true;
+        if (body['password'] == null)
+          _errorCode = body['email'];
+        else
+          _errorCode = body['password'];
+        errorMessage(_errorCode);
+        notifyListeners();
+      }
+    }
+  }
 }

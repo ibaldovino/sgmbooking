@@ -1,14 +1,14 @@
-//TODO: Cambiar a viajes ya agendados
-
 import 'package:flutter/material.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:intl/intl.dart';
-import 'package:sgmbooking/screens/detail_data.dart';
+//import 'package:sgmbooking/screens/detail_data.dart';
 import 'package:sgmbooking/service/netService.dart';
 import 'package:provider/provider.dart';
 import 'package:sgmbooking/utils/appDrawer.dart';
 import 'package:sgmbooking/utils/fonts.dart';
 import 'package:sgmbooking/service/next_screen.dart';
+//import 'package:sgmbooking/models/passageModel.dart';
+import 'package:sgmbooking/screens/PassaggeDetail.dart';
 
 class PassageList extends StatefulWidget {
   const PassageList({Key? key}) : super(key: key);
@@ -55,9 +55,9 @@ class _PassageListState extends State<PassageList> {
                   .map((key, value) => MapEntry(
                       key,
                       GestureDetector(
-                        /*onTap: () {
-                          nextScreeniOS(context, DetailData(results: value));
-                        },*/
+                        onTap: () {
+                          nextScreeniOS(context, PassageDetail(results: value));
+                        },
                         child: Stack(
                           children: [
                             Container(
