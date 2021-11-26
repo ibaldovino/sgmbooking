@@ -57,7 +57,7 @@ Widget appDrawer(BuildContext context) {
             // ...
           },
         ),
-        ListTile(
+        /*ListTile(
           title: const Text('Template'),
           onTap: () {
             Navigator.pop(context);
@@ -65,7 +65,7 @@ Widget appDrawer(BuildContext context) {
             // Update the state of the app.
             // ...
           },
-        ),
+        ),*/
         ListTile(
           title: const Text('Salir'),
           onTap: () {

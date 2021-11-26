@@ -112,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 50,
                 ),
-                Container(
+                /*Container(
                   alignment: Alignment.centerRight,
                   child: TextButton(
                     child: Text(
@@ -127,7 +127,7 @@ class _LoginPageState extends State<LoginPage> {
                       //         builder: (context) => ForgotPasswordPage()));
                     },
                   ),
-                ),
+                ),*/
                 Container(
                   height: 45,
                   child: TextButton(
