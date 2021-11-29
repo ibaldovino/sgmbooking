@@ -36,7 +36,7 @@ class CallApi {
   _setHeadersWithToken() => {
         'Content-type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        'Authorization': 'jwt $token',
       };
 
   _getToken() async {

@@ -124,7 +124,9 @@ class _PassageDetailState extends State<PassageDetail> {
         child: Row(
           children: [
             Container(width: 120, child: Text(title, style: black17_54)),
-            Container(child: Text(value, style: black16)),
+            Container(
+                child: Text(value,
+                    overflow: TextOverflow.ellipsis, style: black16)),
           ],
         ));
   }

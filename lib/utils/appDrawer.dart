@@ -53,6 +53,7 @@ Widget appDrawer(BuildContext context) {
           onTap: () {
             Navigator.pop(context);
             nextScreeniOSReplace(context, PassageList());
+            print("aprete viajes agendados");
             // Update the state of the app.
             // ...
           },

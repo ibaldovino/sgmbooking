@@ -56,7 +56,7 @@ class NetworkBloc extends ChangeNotifier {
 
     print(["login response:", res, body, res.statusCode]);
 
-    if (res.statusCode == 201) {
+    if (res.statusCode == 200) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', body['token']);
 
@@ -88,6 +88,7 @@ class NetworkBloc extends ChangeNotifier {
     if (res.statusCode == 200) {
       var body = json.decode(utf8.decode(res.bodyBytes));
       _bookData = BookModel.fromJson(body);
+      print("llegue viajes disponibles");
     }
 
     notifyListeners();
@@ -98,6 +99,8 @@ class NetworkBloc extends ChangeNotifier {
   Future<bool> getPassage() async {
     var res = await CallApi().getDataParameterWithToken(
         'rest/v1/travel-with-passage/', ""); //?format=json
+    print("get passage");
+    print(res.statusCode);
     if (res.statusCode == 200) {
       var body = json.decode(utf8.decode(res.bodyBytes));
       _passageData = PassageModel.fromJson(body);
@@ -175,7 +178,7 @@ class NetworkBloc extends ChangeNotifier {
       var body = json.decode(utf8.decode(res.bodyBytes));
 
       if (res.statusCode == 200) {
-        /*var reservaDetalle = json.encode(body);
+        /*var reservaDetalle = json.encode(bod2y);
       var resDetail = json.decode(reservaDetalle);*/
 
         debugPrint(body.toString());
