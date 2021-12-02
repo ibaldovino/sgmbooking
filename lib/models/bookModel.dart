@@ -130,7 +130,10 @@ class Results {
     countPassages = json['count_passages'];
     rute = Rute.fromJson(json['rute']);
     finished = json['finished'];
-    program = Program.fromJson(json['program']);
+    if( json['program'] != null){
+      program = Program.fromJson(json['program']);
+    }
+
   }
 
   Map<String, dynamic> toJson() {
@@ -189,9 +192,9 @@ class Program {
   List daysString = new List.filled(1, 1);
 
   Program.fromJson(Map<String, dynamic> json) {
-    subscribedPassenger = List.from(json['subscribed_passenger'])
-        .map((f) => int.parse(f))
-        .toList();
+   // subscribedPassenger = List.from(json['subscribed_passenger'])
+    //     .map((f) => int.parse(f))
+    //   .toList();
     id = json['id'];
     deleted = json['deleted'];
     createdAt = json['created_at'];

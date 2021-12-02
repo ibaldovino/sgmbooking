@@ -36,8 +36,8 @@ class _DetailDataState extends State<DetailData> {
     _value = widget.results.rute.stops.first.id;
     list_items = widget.results.rute.stops;
     print(["widget.results.program:", widget.results.program]);
-    _valueProgram = widget.results.program!.id;
-    programa = widget.results.program!;
+    _valueProgram = widget.results.program.id;
+    programa = widget.results.program;
   }
 
   @override
@@ -65,19 +65,19 @@ class _DetailDataState extends State<DetailData> {
             wdEachRow(
                 "Fecha fin",
                 DateFormat('dd/MM/yy')
-                    .format(DateFormat('yyyy-MM-dd')
-                        .parse(widget.results.program!.endProgram))
+                    .format(DateFormat('dd/MM/yy hh:mm')
+                        .parse(widget.results.estimatedArrival))
                     .toString()),
             wdEachRow(
                 "Hora de partida",
                 DateFormat('HH:mm')
-                    .format(DateFormat("MM/dd/yy hh:mm")
+                    .format(DateFormat("dd/MM/yy hh:mm")
                         .parse(widget.results.estimatedDeparture))
                     .toString()),
             wdEachRow(
                 "Hora de llegada",
                 DateFormat('HH:mm')
-                    .format(DateFormat("MM/dd/yy hh:mm")
+                    .format(DateFormat("dd/MM/yy hh:mm")
                         .parse(widget.results.estimatedArrival))
                     .toString()),
             SizedBox(height: 10),

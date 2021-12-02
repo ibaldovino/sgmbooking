@@ -66,13 +66,13 @@ class _PassageDetailState extends State<PassageDetail> {
             wdEachRow(
                 "Hora de partida",
                 DateFormat('HH:mm')
-                    .format(DateFormat("MM/dd/yy hh:mm")
+                    .format(DateFormat("dd/MM/yy hh:mm")
                         .parse(widget.results.estimatedDeparture))
                     .toString()),
             wdEachRow(
                 "Hora de llegada",
                 DateFormat('HH:mm')
-                    .format(DateFormat("MM/dd/yy hh:mm")
+                    .format(DateFormat("dd/MM/yy hh:mm")
                         .parse(widget.results.estimatedArrival))
                     .toString()),
             SizedBox(height: 10),
