@@ -1,48 +1,73 @@
+import 'dart:convert';
+
 const bookData = {
-  "count": 4,
-  "next": null,
+  "count": 2,
+  "next":
+      "http://ec2-3-17-24-2.us-east-2.compute.amazonaws.com:9990/rest/v1/travel-with-passage/?page=2",
   "previous": null,
   "results": [
     {
-      "id": 4,
-      "estimated_departure": "02/11/21 08:30",
-      "estimated_arrival": "02/11/21 08:30",
-      "total_capacity": 11,
-      "count_passages": 0,
+      "id": 202,
+      "estimated_departure": "01/12/21 08:00",
+      "estimated_arrival": "01/12/21 14:30",
+      "total_capacity": 22,
+      "count_passages": 8,
+      "finished": false,
       "rute": {
         "stops": [
           {
-            "id": 8,
+            "id": 13,
             "deleted": false,
-            "created_at": "2021-10-16T18:25:30.216562+00:00",
-            "updated_at": "2021-10-16T18:25:30.216582+00:00",
-            "name": "Mercedes - Ansina y Varela",
-            "location": "-33.253582332121454,-58.02489280700683"
+            "created_at": "2021-10-27T11:22:28.240621+00:00",
+            "updated_at": "2021-10-27T11:22:28.240640+00:00",
+            "name": "Canelones",
+            "location": "-34.52257537124503,-56.27070665359497"
+          },
+          {
+            "id": 14,
+            "deleted": false,
+            "created_at": "2021-10-27T11:22:38.811717+00:00",
+            "updated_at": "2021-10-27T11:22:38.811736+00:00",
+            "name": "Florida",
+            "location": "-34.09773289693434,-56.19614124298096"
           }
         ],
-        "id": 3,
+        "id": 6,
         "deleted": false,
-        "created_at": "2021-10-16T18:32:48.497755+00:00",
-        "updated_at": "2021-10-16T18:34:06.274361+00:00",
-        "name": "Mercedes1",
+        "created_at": "2021-10-27T11:36:04.081241+00:00",
+        "updated_at": "2021-10-27T11:36:04.081260+00:00",
+        "name": "Montevideo - Fray Bentos",
         "origin": {
-          "id": 7,
+          "id": 2,
           "deleted": false,
-          "created_at": "2021-10-16T18:23:15.395160+00:00",
-          "updated_at": "2021-10-16T18:23:34.600164+00:00",
-          "name": "Mercedes - Plaza Artigas",
-          "location": "-33.25645332791316,-58.028218746185296"
+          "created_at": "2021-09-24T01:24:23.474695+00:00",
+          "updated_at": "2021-10-27T11:22:10.611380+00:00",
+          "name": "Montevideo",
+          "location": "-34.89311206510446,-56.16511344909668"
         },
         "destination": {
-          "id": 10,
+          "id": 12,
           "deleted": false,
-          "created_at": "2021-10-16T18:31:50.437823+00:00",
-          "updated_at": "2021-10-16T18:31:50.437845+00:00",
-          "name": "MdP - Vivero",
-          "location": "-33.111673732982595,-58.18565368652343"
+          "created_at": "2021-10-21T17:08:57.969596+00:00",
+          "updated_at": "2021-10-21T17:08:57.969617+00:00",
+          "name": "Fray Bentos",
+          "location": "-33.12835119163156,-58.32641601562499"
         }
       },
-      "finished": false
+      "program": {
+        "vehicles": [2, 3, 8],
+        "subscribed_passenger": [6, 3, 12, 7, 13, 14, 11, 1],
+        "id": 3,
+        "deleted": false,
+        "created_at": "2021-10-27T11:36:50.062389+00:00",
+        "updated_at": "2021-10-30T02:26:37.691195+00:00",
+        "capacity_limit": 50,
+        "arrival_time": "14:30:00",
+        "departure_time": "08:00:00",
+        "end_program": "2021-12-31",
+        "days": ["Mon", "Tue", "Wed", "Fri"],
+        "rute": 6
+      }
     }
   ]
 };
@@ -86,7 +111,7 @@ class Results {
     required this.countPassages,
     required this.rute,
     required this.finished,
-    //required this.program,
+    required this.program,
   });
   late final int id;
   late final String estimatedDeparture;
@@ -95,7 +120,7 @@ class Results {
   late final int countPassages;
   late final Rute rute;
   late final bool finished;
-  //late final Program program;
+  late final Program program;
 
   Results.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -105,7 +130,7 @@ class Results {
     countPassages = json['count_passages'];
     rute = Rute.fromJson(json['rute']);
     finished = json['finished'];
-    //program = Program.fromJson(json['program']);
+    program = Program.fromJson(json['program']);
   }
 
   Map<String, dynamic> toJson() {
@@ -117,21 +142,67 @@ class Results {
     _data['count_passages'] = countPassages;
     _data['rute'] = rute.toJson();
     _data['finished'] = finished;
-    //_data['program'] = program;
+    _data['program'] = program.toJson;
 
     return _data;
   }
 }
 
-/*class Program {
-  Program({
-    required this.endProgram,
-  });
+class Program {
+  /*
+  "vehicles": [2, 3, 8],
+        "subscribed_passenger": [6, 3, 12, 7, 13, 14, 11, 1],
+        "id": 3,
+        "deleted": false,
+        "created_at": "2021-10-27T11:36:50.062389+00:00",
+        "updated_at": "2021-10-30T02:26:37.691195+00:00",
+        "capacity_limit": 50,
+        "arrival_time": "14:30:00",
+        "departure_time": "08:00:00",
+        "end_program": "2021-12-31",
+        "days": ["Mon", "Tue", "Wed", "Fri"],
+        "rute": 6*/
+  Program(
+      {required this.subscribedPassenger,
+      required this.id,
+      required this.deleted,
+      required this.createdAt,
+      required this.updatedAt,
+      required this.capacity,
+      required this.arrivalTime,
+      required this.departureTime,
+      required this.endProgram,
+      required this.days,
+      required this.ruteId});
 
+  late final List<dynamic> subscribedPassenger;
+  late final int id;
+  late final bool deleted;
+  late final String createdAt;
+  late final String updatedAt;
+  late final int capacity;
+  late final String arrivalTime;
+  late final String departureTime;
   late final String endProgram;
+  late final List<String> days;
+  late final int ruteId;
+  List daysString = new List.filled(1, 1);
 
   Program.fromJson(Map<String, dynamic> json) {
+    subscribedPassenger = List.from(json['subscribed_passenger'])
+        .map((f) => int.parse(f))
+        .toList();
+    id = json['id'];
+    deleted = json['deleted'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+    capacity = json['capacity_limit'];
+    arrivalTime = json['arrival_time'];
+    departureTime = json['departure_time'];
     endProgram = json['end_program'];
+    daysString = json['days'];
+    days = List.from(daysString);
+    ruteId = json['rute'];
   }
 
   Map<String, dynamic> toJson() {
@@ -140,7 +211,7 @@ class Results {
 
     return _data;
   }
-}*/
+}
 
 class Rute {
   Rute({
@@ -186,23 +257,6 @@ class Rute {
     return _data;
   }
 }
-
-/*class Days {
-  Days({
-    required this.name,
-  });
-  late final List<Days> name;
-
-  Days.fromJson(Map<String, dynamic> json) {
-    days = List.from(json['days']).map((e) => Days.fromJson(e)).toList();
-  }
-
-  Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['days'] = days.map((e) => e.toJson()).toList();
-    return _data;
-  }
-}*/
 
 class Stops {
   Stops({

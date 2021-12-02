@@ -20,12 +20,14 @@ class DetailData extends StatefulWidget {
 
 class _DetailDataState extends State<DetailData> {
   int _value = 0;
+  int _valueProgram = 0;
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   var formKey = GlobalKey<FormState>();
   bool bookingStart = true;
   bool bookingComplete = false;
 
   late List<Stops> list_items;
+  late Program programa;
 
   @override
   void initState() {
@@ -33,6 +35,9 @@ class _DetailDataState extends State<DetailData> {
     print(["widget.results.rute.stops:", widget.results.rute.stops]);
     _value = widget.results.rute.stops.first.id;
     list_items = widget.results.rute.stops;
+    print(["widget.results.program:", widget.results.program]);
+    _valueProgram = widget.results.program!.id;
+    programa = widget.results.program!;
   }
 
   @override
@@ -57,12 +62,12 @@ class _DetailDataState extends State<DetailData> {
                     .format(DateFormat('dd/MM/yy HH:mm')
                         .parse(widget.results.estimatedDeparture))
                     .toString()),
-            /*wdEachRow(
+            wdEachRow(
                 "Fecha fin",
                 DateFormat('dd/MM/yy')
                     .format(DateFormat('yyyy-MM-dd')
-                        .parse(widget.results.program.endProgram))
-                    .toString()),*/
+                        .parse(widget.results.program!.endProgram))
+                    .toString()),
             wdEachRow(
                 "Hora de partida",
                 DateFormat('HH:mm')

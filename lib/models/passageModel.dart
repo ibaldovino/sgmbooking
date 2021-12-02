@@ -66,69 +66,6 @@ const passageData = {
         "days": ["Mon", "Tue", "Wed", "Fri"],
         "rute": 6
       }
-    },
-    {
-      "id": 203,
-      "estimated_departure": "02/12/21 08:00",
-      "estimated_arrival": "02/12/21 14:30",
-      "total_capacity": 22,
-      "count_passages": 8,
-      "finished": false,
-      "rute": {
-        "stops": [
-          {
-            "id": 13,
-            "deleted": false,
-            "created_at": "2021-10-27T11:22:28.240621+00:00",
-            "updated_at": "2021-10-27T11:22:28.240640+00:00",
-            "name": "Canelones",
-            "location": "-34.52257537124503,-56.27070665359497"
-          },
-          {
-            "id": 14,
-            "deleted": false,
-            "created_at": "2021-10-27T11:22:38.811717+00:00",
-            "updated_at": "2021-10-27T11:22:38.811736+00:00",
-            "name": "Florida",
-            "location": "-34.09773289693434,-56.19614124298096"
-          }
-        ],
-        "id": 6,
-        "deleted": false,
-        "created_at": "2021-10-27T11:36:04.081241+00:00",
-        "updated_at": "2021-10-27T11:36:04.081260+00:00",
-        "name": "Montevideo - Fray Bentos",
-        "origin": {
-          "id": 2,
-          "deleted": false,
-          "created_at": "2021-09-24T01:24:23.474695+00:00",
-          "updated_at": "2021-10-27T11:22:10.611380+00:00",
-          "name": "Montevideo",
-          "location": "-34.89311206510446,-56.16511344909668"
-        },
-        "destination": {
-          "id": 12,
-          "deleted": false,
-          "created_at": "2021-10-21T17:08:57.969596+00:00",
-          "updated_at": "2021-10-21T17:08:57.969617+00:00",
-          "name": "Fray Bentos",
-          "location": "-33.12835119163156,-58.32641601562499"
-        }
-      },
-      "program": {
-        "vehicles": [2, 3, 8],
-        "subscribed_passenger": [6, 3, 12, 7, 13, 14, 11, 1],
-        "id": 3,
-        "deleted": false,
-        "created_at": "2021-10-27T11:36:50.062389+00:00",
-        "updated_at": "2021-10-30T02:26:37.691195+00:00",
-        "capacity_limit": 50,
-        "arrival_time": "14:30:00",
-        "departure_time": "08:00:00",
-        "end_program": "2021-12-31",
-        "days": ["Mon", "Tue", "Wed", "Fri"],
-        "rute": 6
-      }
     }
   ]
 };
@@ -173,7 +110,7 @@ class ResultsPassage {
     required this.countPassages,
     required this.rute,
     required this.finished,
-    //required this.program,
+    required this.program,
   });
   late final int id;
   late final String estimatedDeparture;
@@ -182,7 +119,7 @@ class ResultsPassage {
   late final int countPassages;
   late final Rute rute;
   late final bool finished;
-  //late final Program program;
+  late final Program program;
 
   ResultsPassage.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -192,7 +129,7 @@ class ResultsPassage {
     countPassages = json['count_passages'];
     rute = Rute.fromJson(json['rute']);
     finished = json['finished'];
-    //program = Program.fromJson(json['program']);
+    program = Program.fromJson(json['program']);
   }
 
   Map<String, dynamic> toJson() {
@@ -204,13 +141,13 @@ class ResultsPassage {
     _data['count_passages'] = countPassages;
     _data['rute'] = rute.toJson();
     _data['finished'] = finished;
-    //_data['program'] = program;
+    _data['program'] = program.toJson();
 
     return _data;
   }
 }
 
-/*class Program {
+class Program {
   Program({
     required this.endProgram,
   });
@@ -227,7 +164,7 @@ class ResultsPassage {
 
     return _data;
   }
-}*/
+}
 
 class Rute {
   Rute({
