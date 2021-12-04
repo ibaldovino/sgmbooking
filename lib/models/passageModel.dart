@@ -155,7 +155,7 @@ class Program {
   late final String endProgram;
 
   Program.fromJson(Map<String, dynamic> json) {
-    endProgram = json['end_program'];
+    //endProgram = json['end_program'];
   }
 
   Map<String, dynamic> toJson() {

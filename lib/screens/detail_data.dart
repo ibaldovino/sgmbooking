@@ -25,6 +25,7 @@ class _DetailDataState extends State<DetailData> {
   var formKey = GlobalKey<FormState>();
   bool bookingStart = true;
   bool bookingComplete = false;
+  bool isChecked = false;
 
   late List<Stops> list_items;
   late Program programa;
@@ -63,12 +64,6 @@ class _DetailDataState extends State<DetailData> {
                         .parse(widget.results.estimatedDeparture))
                     .toString()),
             wdEachRow(
-                "Fecha fin",
-                DateFormat('dd/MM/yy')
-                    .format(DateFormat('dd/MM/yy hh:mm')
-                        .parse(widget.results.estimatedArrival))
-                    .toString()),
-            wdEachRow(
                 "Hora de partida",
                 DateFormat('HH:mm')
                     .format(DateFormat("dd/MM/yy hh:mm")
@@ -80,27 +75,64 @@ class _DetailDataState extends State<DetailData> {
                     .format(DateFormat("dd/MM/yy hh:mm")
                         .parse(widget.results.estimatedArrival))
                     .toString()),
-            SizedBox(height: 10),
-            Container(
-              alignment: Alignment.centerLeft,
-              child: Text("Parada donde sube"),
-            ),
-            Container(
-              child: DropdownButton(
-                value: _value,
-                items: list_items.map((Stops item) {
-                  return DropdownMenuItem<int>(
-                    child: Text('${item.name} - ${item.id}'),
-                    value: item.id,
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _value = value as int;
-                  });
-                },
-              ),
-            ),
+            //SizedBox(height: 10),
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 160,
+                    alignment: Alignment.bottomLeft,
+                    child: Text("Parada donde sube", style: black17_54),
+                  ),
+                  Container(
+                    //padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    alignment: Alignment.bottomLeft,
+                    child: DropdownButton(
+                      value: _value,
+                      items: list_items.map((Stops item) {
+                        return DropdownMenuItem<int>(
+                          child: Text('${item.name} - ${item.id}'),
+                          value: item.id,
+                        );
+                      }).toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _value = value as int;
+                        });
+                      },
+                    ),
+                  ),
+                ]),
+            wdEachRow(
+                "Fecha ultimo viaje",
+                DateFormat('dd/MM/yy')
+                    .format(DateFormat('yyyy-MM-dd')
+                        .parse(widget.results.program.endProgram))
+                    .toString()),
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 160,
+                    padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                    alignment: Alignment.bottomLeft,
+                    child:
+                        Text("Agendarse a toda la serie?", style: black17_54),
+                  ),
+                  Container(
+                    alignment: Alignment.bottomLeft,
+                    child: Checkbox(
+                        checkColor: Colors.green[900],
+                        value: isChecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isChecked = value!;
+                          });
+                        }),
+                  ),
+                ])
           ],
         ),
       ),
@@ -128,7 +160,7 @@ class _DetailDataState extends State<DetailData> {
         padding: EdgeInsets.only(bottom: 10),
         child: Row(
           children: [
-            Container(width: 120, child: Text(title, style: black17_54)),
+            Container(width: 160, child: Text(title, style: black17_54)),
             Container(child: Text(value, style: black16)),
           ],
         ));

@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:sgmbooking/models/passageModel.dart';
+
 const bookData = {
   "count": 2,
   "next":
@@ -72,6 +74,23 @@ const bookData = {
   ]
 };
 
+const defaultProgram = {
+  "program": {
+    "vehicles": [2],
+    "subscribed_passenger": [6],
+    "id": 3,
+    "deleted": false,
+    "created_at": "2021-10-27T11:36:50.062389+00:00",
+    "updated_at": "2021-10-30T02:26:37.691195+00:00",
+    "capacity_limit": 50,
+    "arrival_time": "14:30:00",
+    "departure_time": "08:00:00",
+    "end_program": "2021-12-31",
+    "days": ["Mon", "Tue", "Wed", "Fri"],
+    "rute": 6
+  }
+};
+
 class BookModel {
   BookModel({
     required this.count,
@@ -130,10 +149,26 @@ class Results {
     countPassages = json['count_passages'];
     rute = Rute.fromJson(json['rute']);
     finished = json['finished'];
-    if( json['program'] != null){
+    if (json['program'] != null) {
       program = Program.fromJson(json['program']);
     }
+    {
+      print("aca se rompe");
+      // program = new Program();
 
+      /*new Program(
+          endProgram: json['estimated_arrival'],
+          arrivalTime: json['estimated_arrival'],
+          capacity: 100,
+          createdAt: '',
+          days: [],
+          deleted: false,
+          departureTime: '',
+          id: 1,
+          ruteId: 1,
+          subscribedPassenger: [],
+          updatedAt: '');*/
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -166,17 +201,17 @@ class Program {
         "days": ["Mon", "Tue", "Wed", "Fri"],
         "rute": 6*/
   Program(
-      {required this.subscribedPassenger,
-      required this.id,
-      required this.deleted,
-      required this.createdAt,
-      required this.updatedAt,
-      required this.capacity,
-      required this.arrivalTime,
-      required this.departureTime,
-      required this.endProgram,
-      required this.days,
-      required this.ruteId});
+      {this.subscribedPassenger = const [],
+      this.id = 1,
+      this.deleted = false,
+      this.createdAt = '',
+      this.updatedAt = '',
+      this.capacity = 1,
+      this.arrivalTime = '',
+      this.departureTime = '',
+      this.endProgram = '',
+      this.days = const [""],
+      this.ruteId = 1});
 
   late final List<dynamic> subscribedPassenger;
   late final int id;
@@ -186,13 +221,13 @@ class Program {
   late final int capacity;
   late final String arrivalTime;
   late final String departureTime;
-  late final String endProgram;
+  late String endProgram = "2021-12-31";
   late final List<String> days;
   late final int ruteId;
   List daysString = new List.filled(1, 1);
 
   Program.fromJson(Map<String, dynamic> json) {
-   // subscribedPassenger = List.from(json['subscribed_passenger'])
+    // subscribedPassenger = List.from(json['subscribed_passenger'])
     //     .map((f) => int.parse(f))
     //   .toList();
     id = json['id'];
@@ -202,7 +237,9 @@ class Program {
     capacity = json['capacity_limit'];
     arrivalTime = json['arrival_time'];
     departureTime = json['departure_time'];
-    endProgram = json['end_program'];
+    if (json['end_program'] != null) {
+      endProgram = json['end_program'];
+    }
     daysString = json['days'];
     days = List.from(daysString);
     ruteId = json['rute'];
@@ -210,6 +247,7 @@ class Program {
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
+
     _data['end_program'] = endProgram;
 
     return _data;
