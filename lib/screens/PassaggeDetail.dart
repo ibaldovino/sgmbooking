@@ -24,15 +24,14 @@ class _PassageDetailState extends State<PassageDetail> {
   var formKey = GlobalKey<FormState>();
   bool bookingStart = true;
   bool cancelComplete = false;
-
-  //late List<Stops> list_items;
+  late Origin paradaElgida;
 
   @override
   void initState() {
     super.initState();
-    /*print(["widget.results.rute.stops:", widget.results.rute.stops]);
-    _value = widget.results.rute.stops.first.id;
-    list_items = widget.results.rute.stops;*/
+    print(["widget.results.stop:", widget.results.stop.name]);
+    _value = widget.results.stop.id;
+    paradaElgida = widget.results.stop;
   }
 
   @override
@@ -51,6 +50,7 @@ class _PassageDetailState extends State<PassageDetail> {
             wdEachRow("id viaje", widget.results.id.toString()),
             wdEachRow("Origen", widget.results.rute.origin.name),
             wdEachRow("Destino", widget.results.rute.destination.name),
+            wdEachRow("Parada", widget.results.stop.name),
             wdEachRow(
                 "Fecha",
                 DateFormat('dd/MM/yy')
