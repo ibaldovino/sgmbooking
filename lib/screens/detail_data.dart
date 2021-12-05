@@ -226,7 +226,7 @@ class _DetailDataState extends State<DetailData> {
     SchedulerBinding.instance!.addPostFrameCallback((duration) {
       setState(() {
         _date = DateFormat('yyyy-MM-dd').format(args.value).toString();
-        _date = '"$_date"';
+        //_date = '"$_date"';
         _usrSelectedDate = true;
         print(_date);
         print(_usrSelectedDate.toString());
