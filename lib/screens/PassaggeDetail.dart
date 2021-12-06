@@ -25,6 +25,7 @@ class _PassageDetailState extends State<PassageDetail> {
   bool bookingStart = true;
   bool cancelComplete = false;
   late Origin paradaElgida;
+  bool isChecked = false;
 
   @override
   void initState() {
@@ -76,26 +77,40 @@ class _PassageDetailState extends State<PassageDetail> {
                         .parse(widget.results.estimatedArrival))
                     .toString()),
             SizedBox(height: 10),
-            /*Container(
-              alignment: Alignment.centerLeft,
-              child: Text("Parada donde sube"),
-            ),
             Container(
-              child: DropdownButton(
-                value: _value,
-                items: list_items.map((Stops item) {
-                  return DropdownMenuItem<int>(
-                    child: Text('${item.name} - ${item.id}'),
-                    value: item.id,
-                  );
-                }).toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _value = value as int;
-                  });
-                },
-              ),
-            ),*/
+              width: 160,
+              padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
+              alignment: Alignment.center,
+              child: Text("Cancelación", style: black17_54),
+            ),
+            Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 180,
+                    height: 20,
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    alignment: Alignment.bottomLeft,
+                    child: Text("Cancelar toda la serie?", style: black17_54),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    alignment: Alignment.bottomLeft,
+                    width: 160,
+                    height: 20,
+                    child: Checkbox(
+                        checkColor: Colors.redAccent[300],
+                        focusColor: Colors.redAccent[400],
+                        hoverColor: Colors.redAccent[400],
+                        value: isChecked,
+                        onChanged: (bool? value) {
+                          setState(() {
+                            isChecked = value!;
+                          });
+                        }),
+                  ),
+                ]),
           ],
         ),
       ),
@@ -110,7 +125,8 @@ class _PassageDetailState extends State<PassageDetail> {
           ),
           onPressed: () {
             debugPrint("el boton se apreto");
-            cancelTripFromDetails(widget.results.id, false, null);
+
+            cancelTripFromDetails(widget.results.id, isChecked, null);
           },
           child: Text('Cancelar agenda'),
         ),

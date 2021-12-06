@@ -152,23 +152,6 @@ class Results {
     if (json['program'] != null) {
       program = Program.fromJson(json['program']);
     }
-    {
-      print("aca se rompe");
-      // program = new Program();
-
-      /*new Program(
-          endProgram: json['estimated_arrival'],
-          arrivalTime: json['estimated_arrival'],
-          capacity: 100,
-          createdAt: '',
-          days: [],
-          deleted: false,
-          departureTime: '',
-          id: 1,
-          ruteId: 1,
-          subscribedPassenger: [],
-          updatedAt: '');*/
-    }
   }
 
   Map<String, dynamic> toJson() {
