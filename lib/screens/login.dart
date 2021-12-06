@@ -6,6 +6,7 @@ import 'package:sgmbooking/utils/icons.dart';
 import 'package:sgmbooking/service/netService.dart';
 import 'package:provider/provider.dart';
 import 'package:sgmbooking/utils/snacbar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -27,6 +28,9 @@ class _LoginPageState extends State<LoginPage> {
   bool offsecureText = true;
   bool signInStart = false;
   bool signInComplete = false;
+
+  String _url =
+      'http://ec2-3-17-24-2.us-east-2.compute.amazonaws.com:9990/recovery/';
 
   @override
   Widget build(BuildContext context) {
@@ -112,22 +116,6 @@ class _LoginPageState extends State<LoginPage> {
                 SizedBox(
                   height: 50,
                 ),
-                /*Container(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    child: Text(
-                      'Olvido su contraseña?',
-                      style: TextStyle(color: Theme.of(context).primaryColor),
-                    ),
-                    onPressed: () {
-                      //nextScreen(context, ForgotPasswordPage());
-                      // Navigator.push(
-                      //     context,
-                      //     CupertinoPageRoute(
-                      //         builder: (context) => ForgotPasswordPage()));
-                    },
-                  ),
-                ),*/
                 Container(
                   height: 45,
                   child: TextButton(
@@ -156,6 +144,16 @@ class _LoginPageState extends State<LoginPage> {
                         signInEmailPassword();
                       }),
                 ),
+                Container(
+                  alignment: Alignment.centerRight,
+                  child: TextButton(
+                    child: Text(
+                      'Olvido su contraseña?',
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ),
+                    onPressed: _launchURL,
+                  ),
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -180,6 +178,10 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ));
+  }
+
+  void _launchURL() async {
+    if (!await launch(_url)) throw 'Could not launch $_url';
   }
 
   signInEmailPassword() async {
