@@ -48,7 +48,7 @@ class _PassageDetailState extends State<PassageDetail> {
           key: formKey,
           children: [
             SizedBox(height: 20),
-            wdEachRow("id viaje", widget.results.id.toString()),
+            //wdEachRow("id viaje", widget.results.id.toString()),
             wdEachRow("Origen", widget.results.rute.origin.name),
             wdEachRow("Destino", widget.results.rute.destination.name),
             wdEachRow("Parada", widget.results.stop.name),
@@ -100,7 +100,7 @@ class _PassageDetailState extends State<PassageDetail> {
                     width: 160,
                     height: 20,
                     child: Checkbox(
-                        checkColor: Colors.redAccent[300],
+                        checkColor: Colors.red[300],
                         focusColor: Colors.redAccent[400],
                         hoverColor: Colors.redAccent[400],
                         value: isChecked,

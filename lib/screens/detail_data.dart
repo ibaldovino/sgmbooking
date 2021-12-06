@@ -61,7 +61,7 @@ class _DetailDataState extends State<DetailData> {
           key: formKey,
           children: [
             SizedBox(height: 20),
-            wdEachRow("id viaje", widget.results.id.toString()),
+            //wdEachRow("id viaje", widget.results.id.toString()),
             wdEachRow("Origen", widget.results.rute.origin.name),
             wdEachRow("Destino", widget.results.rute.destination.name),
             wdEachRow(
