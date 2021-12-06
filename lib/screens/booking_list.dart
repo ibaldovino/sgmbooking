@@ -71,6 +71,7 @@ class _BookingListState extends State<BookingList> {
                                 children: [
                                   Container(
                                       child: Text(value.rute.name,
+                                          overflow: TextOverflow.ellipsis,
                                           style: TextStyle(
                                               color: Colors.green,
                                               fontSize: 25))),

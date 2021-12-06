@@ -72,6 +72,7 @@ class _PassageListState extends State<PassageList> {
                                 children: [
                                   Container(
                                       child: Text(value.rute.name,
+                                          overflow: TextOverflow.fade,
                                           style: TextStyle(
                                               color: Colors.green,
                                               fontSize: 25))),
