@@ -149,8 +149,10 @@ class Results {
     countPassages = json['count_passages'];
     rute = Rute.fromJson(json['rute']);
     finished = json['finished'];
-    if (json['program'] != null) {
+    if (json['is_program']) {
       program = Program.fromJson(json['program']);
+    }else{
+      program = Program();
     }
   }
 
@@ -192,7 +194,7 @@ class Program {
       this.capacity = 1,
       this.arrivalTime = '',
       this.departureTime = '',
-      this.endProgram = '',
+      this.endProgram = '2021-12-31',
       this.days = const [""],
       this.ruteId = 1});
 
