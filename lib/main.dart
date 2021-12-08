@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:sgmbooking/screens/login.dart';
 import 'package:sgmbooking/service/netService.dart';
@@ -15,7 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate
+      ],
       title: 'Flutter Demo',
+      supportedLocales: [ const Locale('es')],
       theme: ThemeData(
         primarySwatch: Colors.green,
 
