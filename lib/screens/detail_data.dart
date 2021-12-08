@@ -55,7 +55,7 @@ class _DetailDataState extends State<DetailData> {
       appBar: AppBar(
         title: Text("Detalles del viaje"),
       ),
-      body: Container(
+      body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
         child: Column(
           key: formKey,
@@ -186,6 +186,7 @@ class _DetailDataState extends State<DetailData> {
                     onSelectionChanged: selectionChanged,
                   ),
                 ))),
+            SizedBox(height: 80),
           ],
         ),
       ),
