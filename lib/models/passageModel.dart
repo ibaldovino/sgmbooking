@@ -112,6 +112,7 @@ class ResultsPassage {
     required this.rute,
     required this.finished,
     required this.program,
+    required this.is_program,
   });
   late final Origin stop;
   late final int id;
@@ -122,6 +123,7 @@ class ResultsPassage {
   late final Rute rute;
   late final bool finished;
   late final Program program;
+  late final bool is_program;
 
   ResultsPassage.fromJson(Map<String, dynamic> json) {
     //if (json['stop'] != null) {
@@ -135,6 +137,7 @@ class ResultsPassage {
     rute = Rute.fromJson(json['rute']);
     finished = json['finished'];
     program = Program.fromJson(json['program']);
+    is_program = json['is_program'];
   }
 
   Map<String, dynamic> toJson() {

@@ -77,13 +77,17 @@ class _PassageDetailState extends State<PassageDetail> {
                         .parse(widget.results.estimatedArrival))
                     .toString()),
             SizedBox(height: 10),
-            Container(
+        Visibility(
+          visible: widget.results.is_program,
+          child: Container(
               width: 160,
               padding: EdgeInsets.fromLTRB(0, 15, 0, 15),
               alignment: Alignment.center,
               child: Text("Cancelación", style: black17_54),
-            ),
-            Row(
+            )),
+        Visibility(
+          visible: widget.results.is_program,
+          child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -110,7 +114,7 @@ class _PassageDetailState extends State<PassageDetail> {
                           });
                         }),
                   ),
-                ]),
+                ])),
           ],
         ),
       ),

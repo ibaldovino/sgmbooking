@@ -131,6 +131,7 @@ class Results {
     required this.rute,
     required this.finished,
     required this.program,
+    required this.is_program,
   });
   late final int id;
   late final String estimatedDeparture;
@@ -140,6 +141,7 @@ class Results {
   late final Rute rute;
   late final bool finished;
   late final Program program;
+  late final bool is_program;
 
   Results.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -149,6 +151,7 @@ class Results {
     countPassages = json['count_passages'];
     rute = Rute.fromJson(json['rute']);
     finished = json['finished'];
+    is_program = json['is_program'];
     if (json['is_program']) {
       program = Program.fromJson(json['program']);
     }else{

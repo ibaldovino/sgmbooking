@@ -135,8 +135,9 @@ class _DetailDataState extends State<DetailData> {
                     ),
                   ),
                 ]),
-
-            Row(
+        Visibility(
+          visible: widget.results.is_program,
+          child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -166,8 +167,11 @@ class _DetailDataState extends State<DetailData> {
                           });
                         }),
                   ),
-                ]),
-            Visibility(
+                ])),
+
+        Visibility(
+          visible: widget.results.is_program,
+          child: Visibility(
                 visible: !isChecked,
                 child: Container(
                   child: SfDateRangePicker(
@@ -181,7 +185,7 @@ class _DetailDataState extends State<DetailData> {
                         .parse(widget.results.program.endProgram),
                     onSelectionChanged: selectionChanged,
                   ),
-                )),
+                ))),
           ],
         ),
       ),
