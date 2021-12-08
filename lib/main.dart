@@ -19,13 +19,13 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: [
         GlobalMaterialLocalizations.delegate
       ],
-      title: 'Flutter Demo',
+      title: 'SGM - Booking',
       supportedLocales: [ const Locale('es')],
       theme: ThemeData(
         primarySwatch: Colors.green,
 
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'SGM - Booking'),
     );
   }
 }
